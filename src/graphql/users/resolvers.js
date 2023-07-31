@@ -8,7 +8,7 @@ const Query = {
    * Hint: combineResolvers from 'graphql-resolvers' package is a function that takes in multiple resolvers and returns a single resolver. You can use it to combine multiple resolvers into a single resolver.
    * Hint: You will have to implement isAuthenticated resolver in src/graphql/shared/resolvers/isAuthenticated.js before using it there
    */
-  me: async (parent, args, { me }) => UserWorkflow.getAccountInfoById(me.id),
+  me: combineResolvers(isAuthenticated, async (parent, args, { me }) => UserWorkflow.getAccountInfoById(me.id)),
 };
 
 const Mutation = {
